@@ -1,12 +1,19 @@
-import React from 'react'
-import products from "../component/products"
-
+import React, { useEffect,useState } from 'react'
+import axios from "axios"
 // const ProductScreen = (props) => {
-const ProductScreen = ({match:{params:{yu}}}) => {
+const ProductScreen = (props) => {
 
-    const product=products.find((item)=>{
-      return item._id===yu
-    })
+  const [product,setProduct]=useState([])
+  useEffect(()=>{
+    async function getItem(){
+      const res=await axios.get(`/api/product/${props.match.paras.yu}`)
+      setProduct(res.data)
+      console.log(res.data)
+    }
+    getItem()
+  },[])
+
+   
 
     return (
     <div className='grid md:grid-cols-10 grid-cols-1 gap-3 mt-12'>

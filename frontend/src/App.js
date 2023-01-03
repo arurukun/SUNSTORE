@@ -1,6 +1,6 @@
 import Header from "./component/header";
 import Footer from "./component/footer";
-import HomeScreen from "./screen/homeScreen"
+import HomeScreen from "./screen/HomeScreen"
 import {BrowserRouter, Route} from "react-router-dom";
 import ProductScreen from "./screen/ProductScreen"
 

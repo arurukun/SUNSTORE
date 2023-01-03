@@ -1,15 +1,25 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import products from '../component/products'
+import axios from "axios"
 
-const homeScreen = () => {
+const HomeScreen = () => {
+    const [products, setProducts] = useState([])
+
+    useEffect(()=>{
+        async function callItem(){
+            const res=await axios.get("/api/product")
+            console.log(res)
+            setProducts(res.data)
+        } 
+    callItem()
+    },[])
+
   return (
     <>
         <p className='text-3xl my-4'>- Latest Products -</p>
         <div className='grid grid-cols-4 gap-4'>
             {products.map(product=>{
                 return (<div className='p-2 border-2 rounded'>
-                    {/* <a href={`https://google.com`}> */}
                     <Link to={`/product/${product._id}`}>
                         <img src={product.image} />
                         <p className='text-2xl'> {product.name}</p>
@@ -44,4 +54,4 @@ const homeScreen = () => {
 //     rating: 4,
 //     numReviews: 12,
 //   },
-export default homeScreen
+export default HomeScreen
