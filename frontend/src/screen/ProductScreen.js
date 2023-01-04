@@ -6,9 +6,9 @@ const ProductScreen = (props) => {
   const [product,setProduct]=useState([])
   useEffect(()=>{
     async function getItem(){
-      const res=await axios.get(`/api/product/${props.match.paras.yu}`)
+      const res=await axios.get(`/api/product/${props.match.params.yu}`)
       setProduct(res.data)
-      console.log(res.data)
+      console.log(res)
     }
     getItem()
   },[])
