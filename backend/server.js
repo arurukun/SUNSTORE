@@ -1,27 +1,21 @@
-import express from "express"
-import products from "./Data/products.js"
+import express, { application } from "express"
 import dotenv from "dotenv"
 import connect from "./Data/mongoose.js"
 import colors from "colors"
+
+import productRoute from "./routes/productRoute.js"
 
 const app = express()
 app.use(express.json())
 dotenv.config()
 connect()
 
+app.use("/api/product",productRoute)
+
 const PORT=process.env.PORT || 5000
 app.listen(PORT,console.log(`This is ${PORT}`.rainbow))
 
-app.get("/api/product",async(req,res)=>{
-    res.json(products)
-})
 
-app.get("/api/product/:yu",(req,res)=>{
-    const product=products.find((item)=>{
-        return item._id===req.params.yu
-    })
-    res.json(product)
-})
 
 // app.post("/api/product",async(req,res)=>{
 //     products=products + newProd
