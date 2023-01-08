@@ -11,7 +11,7 @@ const HomeScreen = () => {
             console.log(res)
             setProducts(res.data)
         } 
-    callItem()
+        callItem()
     },[])
 
   return (

@@ -1,14 +1,18 @@
 import express, { application } from "express"
 import dotenv from "dotenv"
 import connect from "./Data/mongoose.js"
+import cors from "cors"
 import colors from "colors"
 
 import productRoute from "./routes/productRoute.js"
 
 const app = express()
+app.use(cors())
 app.use(express.json())
 dotenv.config()
 connect()
+
+app.get("/", async(req,res)=>{res.json({"message":"Hi how are you..."})})
 
 app.use("/api/product",productRoute)
 
