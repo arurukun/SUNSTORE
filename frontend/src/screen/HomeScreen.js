@@ -29,7 +29,7 @@ const HomeScreen = () => {
 
   return (
     <>
-        <div className='text-2xl my-4'>Latest Products</div>
+        <div className='m-6 text-4xl text-yellow-500'>Latest Products</div>
         {loading ? 
         <h2>Loading...</h2> 
         : error ? 
