@@ -2,7 +2,7 @@ import express from "express"
 const router=express.Router()
 
 // import Product from "../Data/models/productModel.js"
-import { getProducts,getProductById } from "../contorollers/productContoroller"
+import { getProducts,getProductById } from "../controllers/productController.js"
 
 // router.get("/",async(req,res)=>{
 //     const products=await Product.find({})
