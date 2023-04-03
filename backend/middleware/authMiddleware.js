@@ -8,7 +8,6 @@ const protect=asyncHandler(async(req,res,next)=>{
         try{
             token=req.headers.authorization.split(" ")[1]
             const decode=jwt.verify(token,process.env.JWT_SECRET)
-            console.log(decode)
             req.user=await User.findById(decode.userId).select("-password")
             next()
         }catch(e){
