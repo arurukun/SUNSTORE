@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken"
 
 const authUser=asyncHandler(async(req,res)=>{
     const {email,password:pass}=req.body
+    console.log(email)
     // res.json({email,password})
     const user=await User.findOne({email})
     if(user && (await bcrypt.compare(pass,user.password))){

@@ -1,5 +1,5 @@
-import Header from "./component/header";
-import Footer from "./component/footer";
+import Header from "./component/Header";
+import Footer from "./component/Footer";
 import HomeScreen from "./screen/HomeScreen"
 import {BrowserRouter, Route} from "react-router-dom";
 import ProductScreen from "./screen/ProductScreen"
