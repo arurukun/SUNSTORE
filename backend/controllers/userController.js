@@ -27,8 +27,8 @@ const registerUser=asyncHandler(async(req,res)=>{
     const {name,email,password}=req.body
     const userExists=await User.findOne({email})
     if(userExists){
-        res.status(400)
-        throw new Error("User already exists")
+        res.status(400).send("User already exists")
+        // throw new Error("User already exists")
     }
     
     const passwordHash=await bcrypt.hash(password, 10)
@@ -42,8 +42,9 @@ const registerUser=asyncHandler(async(req,res)=>{
             token:jwt.sign({userId:user._id},process.env.JWT_SECRET,{expiresIn:"30d"})
         })
     }else{
-        res.status(400)
-        throw new Error("Invalid user data")
+        // console.log("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
+        res.status(400).send("Invalid user data")
+        // throw new Error("Invalid user data")
     }
 })
 

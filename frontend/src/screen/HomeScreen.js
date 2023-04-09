@@ -39,10 +39,10 @@ const HomeScreen = () => {
             return (
                 <div className=' border border-black p-2'>
                     {/* <a href={`http://localhost:3000/product/${item._id}`}> */}
-                    <a href={"http://localhost:3000/product/" + item._id}>
+                    <Link to={"http://192.168.11.2:3000/product/" + item._id}>
                         <img src={item.image}></img>
                         <div className='text-2xl mt-2'>{item.name}</div>
-                    </a>
+                    </Link>
                     <div className='text-sm my-2'>{item.price}</div>
                     <div className="flex">
                         <span>{item.rating >0 ? <i className="fas fa-star text-yellow-500"></i> : <i className="far fa-star text-yellow-500"></i>}</span>

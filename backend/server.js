@@ -8,7 +8,7 @@ import productRoute from "./routes/productRoute.js"
 import userRoutes from"./routes/userRoute.js"
 
 const app = express()
-app.use(cors())
+app.use(cors("*"))
 app.use(express.json())
 dotenv.config()
 connect()

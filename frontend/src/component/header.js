@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import DropdownMenu from './Dropdown'
 
 import {useDispatch,useSelector} from "react-redux"
+import { logout } from '../action/userAction'
 
 
 
@@ -11,7 +12,7 @@ const Header = () => {
   const {userInfo}=useSelector((s)=>s.userLogin)
   // const list=["profile", "logout"]
   const logoutHandler=()=>{
-    console.log("logout")
+    dispatch(logout())
   }
   // const handleSelectChange = (event) => {
   //   const selectedOption = event.target.value;
@@ -29,12 +30,12 @@ const Header = () => {
           <div className='flex space-x-8'>
             <Link to="/cart" className='text-xs flex self-center'><i className='fas fa-shopping-cart'></i> CART</Link>
             {userInfo ? 
-            <DropdownMenu header={userInfo.name} list={["Profile", "Logout"]} />
-            // <select onChange={logoutHandler} title={userInfo.name} className='bg-yellow-500'>
-            //   <option disable>{userInfo.name}</option>
-            //   <option>Profile</option>
-            //   <option>Logout</option>
-            // </select>            
+            // <DropdownMenu header={userInfo.name} list={["Profile", "Logout"]} onChange={logoutHandler}/>
+            <select onChange={(e)=>e.target.value==="Logout" && logoutHandler()  } title={userInfo.name} className='bg-yellow-500'>
+              <option disable>{userInfo.name}</option>
+              <option>Profile</option>
+              <option>Logout</option>
+            </select>            
             :
             <Link to="/user" className='text-xs'><i className='fas fa-user'></i> SIGN IN</Link>
              }
