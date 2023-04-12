@@ -31,13 +31,14 @@ const Header = () => {
             <Link to="/cart" className='text-xs flex self-center'><i className='fas fa-shopping-cart'></i> CART</Link>
             {userInfo ? 
             // <DropdownMenu header={userInfo.name} list={["Profile", "Logout"]} onChange={logoutHandler}/>
-            <select onChange={(e)=>e.target.value==="Logout" && logoutHandler()  } title={userInfo.name} className='bg-yellow-500'>
+            // <select onChange={(e)=>e.target.value==="Logout" && logoutHandler()  } title={userInfo.name} className='bg-yellow-500'>
+            <select onChange={(e)=>{if(e.target.value=="Profile"){window.location.href = "/profile"}else if(e.target.value=="Logout"){logoutHandler()}}  } title={userInfo.name} className='bg-yellow-500'>
               <option disable>{userInfo.name}</option>
               <option>Profile</option>
               <option>Logout</option>
             </select>            
             :
-            <Link to="/user" className='text-xs'><i className='fas fa-user'></i> SIGN IN</Link>
+            <Link to="/login" className='text-xs flex self-center'><i className='fas fa-user'></i> SIGN IN</Link>
              }
           </div>
         </div>

@@ -42,7 +42,6 @@ const registerUser=asyncHandler(async(req,res)=>{
             token:jwt.sign({userId:user._id},process.env.JWT_SECRET,{expiresIn:"30d"})
         })
     }else{
-        // console.log("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
         res.status(400).send("Invalid user data")
         // throw new Error("Invalid user data")
     }
@@ -52,4 +51,25 @@ const getUserProfile=asyncHandler(async(req,res)=>{
     res.json(req.user)
 })
 
-export {authUser,registerUser,getUserProfile}
+const updateUserProfile=asyncHandler(async(req,res)=>{
+    const user=await User.findById(req.user._id)
+    if(user){
+        user.name=req.body.name || user.name
+        user.email=req.body.email || user.email
+        if(req.body.password){
+            user.password=req.body.password
+        }
+        const updateUser=await user.save()
+        res.json({
+            _id:updateUser._id,
+            name:updateUser.name,
+            email:updateUser.email,
+            isAdmin:updateUser.isAdmin,
+            token:jwt.sign({userId:updateUser._id},process.env.JWT_SECRET,{expiresIn:"30d"})
+        })
+    }else{
+        res.status(404).send("User not found")
+    }
+})
+
+export {authUser,registerUser,getUserProfile,updateUserProfile}
