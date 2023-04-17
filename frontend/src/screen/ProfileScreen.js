@@ -1,8 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import {Link} from "react-router-dom"
 import {useDispatch,useSelector} from "react-redux"
-import { getUserDetails } from '../action/userAction'
-// import { register } from '../action/userAction'
+import { getUserDetails,updateUserProfile } from '../action/userAction'
 
 export const ProfileScreen = ({location,history}) => {
     const [name,setName]=useState("")
@@ -15,13 +14,14 @@ export const ProfileScreen = ({location,history}) => {
     const {loading,error,user}=useSelector((s)=>s.userDetails)
 
     const {userInfo}=useSelector((s)=>s.userLogin)
+
+    const {success}=useSelector((s)=>s.userUpdateProfile)
    
     useEffect(()=>{
       if(!userInfo){
         history.push("/login")
       }else{
         if(!user.name){
-          // console.log("jhgf")
           dispatch(getUserDetails("profile"))
         }else{
           setName(user.name)
@@ -33,20 +33,19 @@ export const ProfileScreen = ({location,history}) => {
     const submitHandler=async(e)=>{
         e.preventDefault()
         if(password !== confirmPassword){
-            console.log(password)
-            console.log(confirmPassword)
-            setMessage("Passwords do not match")
+            setMessage("Passwords do not match!!")
         }else{
-            // dispatch(register(name,email,password))
+            dispatch(updateUserProfile({id:user._id,name,email,password}))
         }
     }
   return (
     <div className='md:grid md:grid-cols-3 gap-4 mt-6'>
         <div>
           <h1 className='text-3xl text-yellow-500'>User Profile</h1>
-          {message && <div>{message}</div>}
-          {error && <div className='text-red-600 bg-red-300 w-full mt-4 text-center'>! {error}</div>}
+          {error && <div className='text-red-600 bg-red-300 w-full mt-4 text-center'>{error}</div>}
+          {message && <div className='text-red-600 bg-yellow-300 w-full mt-4 text-center'>{message}</div>}
           {loading && <div>Loading...</div>}
+          {success && <div className='text-yellow-600 bg-yellow-300 w-full mt-4 text-center'>Updated Profile</div>}
           <form className='flex flex-col mt-2 w-full p-4'>
               <label className='text-yellow-500'>Name</label>
               <input type="text" placeholder='Enter name' onChange={(e)=>setName(e.target.value)} className="border border-yellow-700 " value={name}></input>
