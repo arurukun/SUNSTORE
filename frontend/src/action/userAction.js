@@ -7,7 +7,7 @@ export const login=(email,password)=>async(dispatch)=>{
         // const config={headers:{}}
         const config={headers:{"constent-type":"application/json"}}
         // console.log(email)
-        const {data}=await axios.post("http://192.168.11.2:5000/api/user/login",{email,password},config)
+        const {data}=await axios.post("http://localhost:5000/api/user/login",{email,password},config)
         dispatch({type:USER_LOGIN_SUCCESS,payload:data})
         localStorage.setItem("userInfo",JSON.stringify(data))
     }catch(e){
@@ -27,7 +27,7 @@ export const register=(name,email,password)=>async(dispatch)=>{
         // const config={headers:{}}
         const config={headers:{"constent-type":"application/json"}}
         // console.log(email)
-        const {data}=await axios.post("http://192.168.11.2:5000/api/user",{name,email,password},config)
+        const {data}=await axios.post("http://localhost:5000/api/user",{name,email,password},config)
         // dispatch({type:USER_REGISTER_SUCCESS,payload:data})
         dispatch({type:USER_REGISTER_SUCCESS,payload:data})
         localStorage.setItem("userInfo",JSON.stringify(data))

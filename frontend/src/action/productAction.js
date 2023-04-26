@@ -4,7 +4,7 @@ import {PRODUCT_LIST_REQUEST,PRODUCT_LIST_SUCCESS,PRODUCT_LIST_FAIL, PRODUCT_DET
 export const listProducts=()=>async (dispatch)=>{
     try{
         dispatch({type:PRODUCT_LIST_REQUEST})
-        const {data}=await axios.get("http://192.168.11.2:5000/api/product/")
+        const {data}=await axios.get("http://localhost:5000/api/product/")
         dispatch({
             type:PRODUCT_LIST_SUCCESS,
             payload:data
@@ -20,7 +20,7 @@ export const listProducts=()=>async (dispatch)=>{
 export const listProductDetails=(yu)=>async (dispatch)=>{
     try{
         dispatch({type:PRODUCT_DETAILS_REQUEST})
-        const {data}=await axios.get(`http://192.168.11.2:5000/api/product/${yu}`)
+        const {data}=await axios.get(`http://localhost:5000/api/product/${yu}`)
         dispatch({
             type:PRODUCT_DETAILS_SUCCESS,
             payload:data

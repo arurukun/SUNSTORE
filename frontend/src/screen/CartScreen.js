@@ -53,9 +53,9 @@ export const CartScreen = ({match,location,history}) => {
       </div>
       ))}
         <div className='mt-10 w-max p-4 mx-auto border-amber-900 border-2 '> 
-          <p className='text-2xl text-yellow-600'>SUBTOTAL <span className='text-amber-900'>( {cartItems.reduce((acc,item)=>acc+item.qty,0)} )</span> ITEMS</p>
-          <p className='text-2xl text-yellow-600 text-center'>PRICE: <span className='text-amber-900'>${cartItems.reduce((acc,item)=>acc+item.qty*item.price,0).toFixed(2)}</span></p>
-          <button onClick={checkoutHandler} disabled={cartItems.lenght===0} className="w-max mx-auto flex bg-yellow-500 hover:text-amber-900 mt-4">Proceed to checkout</button>
+          <p className='text-xl text-yellow-600'>Subtotal <span className='text-amber-900'>( {cartItems.reduce((acc,item)=>acc+item.qty,0)} )</span> Items</p>
+          <p className='text-xl text-yellow-600 text-center'>Price: <span className='text-amber-900'>${cartItems.reduce((acc,item)=>acc+item.qty*item.price,0).toFixed(2)}</span></p>
+          <button onClick={checkoutHandler} disabled={cartItems.lenght===0} className="w-max mx-auto flex bg-yellow-500 hover:text-amber-900 mt-4">PROCEED TO CHECKOUT</button>
         </div>
       </div>
       }</div>

@@ -5,6 +5,7 @@ import { cartReducer } from "./reducer/cartReducer"
 
 import { productDetailsReducer, productListReducer } from "./reducer/productReducer"
 import { userDetailsReducer, userLoginReducer, userRegisterReducer, userUpdateProfileReducer } from "./reducer/userReducer"
+import { orderCreateReducer } from "./reducer/orderReducer"
 
 // const reducer=combineReducers({})
 const reducer=combineReducers({
@@ -15,6 +16,7 @@ const reducer=combineReducers({
     userRegister:userRegisterReducer,
     userDetails:userDetailsReducer,
     userUpdateProfile:userUpdateProfileReducer,
+    orderCreate:orderCreateReducer,
 })
 
 const cartItemsFromStorage=localStorage.getItem("cartItem") ? JSON.parse(localStorage.getItem("cartItem")) : []
@@ -23,9 +25,13 @@ const cartItemsFromStorage=localStorage.getItem("cartItem") ? JSON.parse(localSt
 
 const userInfoFromStorage=localStorage.getItem("userInfo") ? JSON.parse(localStorage.getItem("userInfo")) : null
 
+
+const shippingAddressFromStorage=localStorage.getItem("shippingAddress") ? JSON.parse(localStorage.getItem("shippingAddress")) : {}
+const paymentMethodFromStorage="Paypal"
+
 const initialState={
-    cart:{cartItems:cartItemsFromStorage},
-    userLogin:{userInfo:userInfoFromStorage}
+    cart:{shippingAddress:shippingAddressFromStorage,paymentMethod:paymentMethodFromStorage,cartItems:cartItemsFromStorage},
+    userLogin:{userInfo:userInfoFromStorage},
 }
 
 const middleware=[thunk]

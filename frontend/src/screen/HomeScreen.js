@@ -39,7 +39,7 @@ const HomeScreen = () => {
             return (
                 <div className=' border border-black p-2'>
                     {/* <a href={`http://localhost:3000/product/${item._id}`}> */}
-                    <Link to={"http://192.168.11.2:3000/product/" + item._id}>
+                    <Link to={"/product/" + item._id}>
                         <img src={item.image}></img>
                         <div className='text-2xl mt-2'>{item.name}</div>
                     </Link>
