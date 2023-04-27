@@ -14,6 +14,8 @@ dotenv.config()
 connect()
 app.use(express.json())
 
+app.get("/api/config/paypal", (req,res)=>{res.json(process.env.PAYPAL_CLIENT_ID)})
+
 // app.get("/", async(req,res)=>{res.json({"message":"Hi how are you..."})})
 app.get("/", async(req,res)=>{res.json({message:"Hi how are you..."})})
 

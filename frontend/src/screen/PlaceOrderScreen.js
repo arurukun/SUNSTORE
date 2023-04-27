@@ -39,34 +39,36 @@ export const PlaceOrderScreen = ({history}) => {
     }
 
   return (
-    <div  className="divide-y divide-yellow-400 my-6">
-        <div className="p-6">
-            <h2 className='text-2xl text-yellow-500 mb-4'>Shipping</h2>
-            <p>Address:<strong>{cart.shippingAddress.address},{cart.shippingAddress.city},{cart.shippingAddress.postalCode},{cart.shippingAddress.country}</strong></p>
-        </div>
-        <div className="p-6">
-            <h2 className='text-2xl text-yellow-500 mb-4'>Payment Method</h2>
-            <p>Method:<strong>{cart.paymentMethod}</strong></p>
-        </div>
-        <div className="p-6">
-            <h2 className='text-2xl text-yellow-500 mb-4'>Order Items</h2>
-            {cart.cartItems.length===0 ? <p>Your cart is empty</p> : 
-            <div>
-                {cart.cartItems.map((item,index)=>(
-                    <div kye={index} className='md:flex md:flex-row p-2 divide-y divide-yellow-400'>
-                        <img src={item.image} alt={item.name} className='w-20 h-20 mr-4'></img>
-                        <Link to={`/product/${item.product}`} className='md:grid md:grid-cols-3 gap-6'>
-                            <div>{item.name}</div>
-                            <div>{item.qty}×${item.price}=${item.qty*item.price}</div>
-                        </Link>
-                    </div>
-                ))}
+    <div className='md:grid md:grid-cols-8 gap-2'>
+        <div  className="divide-y divide-yellow-400 my-6 col-span-5">
+            <div className="p-6">
+                <h2 className='text-2xl text-yellow-500 mb-4'>Shipping</h2>
+                <p>Address:<strong>{cart.shippingAddress.address},{cart.shippingAddress.city},{cart.shippingAddress.postalCode},{cart.shippingAddress.country}</strong></p>
             </div>
-            }
+            <div className="p-6">
+                <h2 className='text-2xl text-yellow-500 mb-4'>Payment Method</h2>
+                <p>Method:<strong>{cart.paymentMethod}</strong></p>
+            </div>
+            <div className="p-6">
+                <h2 className='text-2xl text-yellow-500 mb-4'>Order Items</h2>
+                {cart.cartItems.length===0 ? <p>Your cart is empty</p> : 
+                <div>
+                    {cart.cartItems.map((item,index)=>(
+                        <div kye={index} className='md:flex md:flex-row p-2 divide-y divide-yellow-400'>
+                            <img src={item.image} alt={item.name} className='w-20 h-20 mr-4'></img>
+                            <Link to={`/product/${item.product}`} className='md:grid md:grid-cols-3 gap-6'>
+                                <div>{item.name}</div>
+                                <div>{item.qty}×${item.price}=${item.qty*item.price}</div>
+                            </Link>
+                        </div>
+                    ))}
+                </div>
+                }
+            </div>
         </div>
-        <div className="p-6">
+        <div className="p-6 md:col-span-3">
             <h2 className='text-2xl text-yellow-500 mb-4'>Order Summary</h2>
-            <div className='flex flex-col justify-between sm:w-3/5 md:w-2/5 border-amber-900 border-2 p-4 divide-y divide-yellow-400'>
+            <div className='flex flex-col justify-between border-amber-900 border-2 p-4 divide-y divide-yellow-400'>
                 <div className='flex flex-row justify-between '>
                     <p>Items</p>
                     <p>${cart.itemsPrice}</p>
