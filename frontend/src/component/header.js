@@ -40,6 +40,14 @@ const Header = () => {
             :
             <Link to="/login" className='text-xs flex self-center'><i className='fas fa-user'></i> SIGN IN</Link>
              }
+             {userInfo && userInfo.isAdmin && (
+              <select onChange={(e)=>{if(e.target.value=="Users"){window.location.href = "/admin/userlist"}else if(e.target.value=="Products"){window.location.href = "/admin/productlist"}else if(e.target.value=="Orders"){window.location.href = "/admin/orderlist"}}  } title="Admin" className='bg-yellow-500'>
+                <option disable>Admin</option>
+                <option>Users</option>
+                <option>Products</option>
+                <option>Orders</option>
+              </select>
+             )}
           </div>
         </div>
 

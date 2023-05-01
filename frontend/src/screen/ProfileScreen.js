@@ -60,7 +60,7 @@ export const ProfileScreen = ({location,history}) => {
               <input type="text" placeholder='Enter password' onChange={(e)=>setPassword(e.target.value)} className="border border-yellow-700"></input>
               <label className='text-yellow-500'>Confirm Password</label>
               <input type="text" placeholder='Enter password' onChange={(e)=>setConfirmPassword(e.target.value)} className="border border-yellow-700"></input>
-              <button onClick={submitHandler} className="bg-yellow-400 px-4 py-2 hover:bg-yellow-200 my-4 mx-auto">UPDATE</button>
+              <button onClick={submitHandler} className="bg-yellow-400 fpx-4 py-2 hover:bg-yellow-200 my-4 mx-auto">UPDATE</button>
           </form>
         </div>
         <div>
