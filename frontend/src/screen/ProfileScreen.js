@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react'
 import {Link} from "react-router-dom"
 import {useDispatch,useSelector} from "react-redux"
 import { getUserDetails,updateUserProfile } from '../action/userAction'
+import { listMyOrder } from '../action/orderAction'
 
 export const ProfileScreen = ({location,history}) => {
     const [name,setName]=useState("")
@@ -16,6 +17,8 @@ export const ProfileScreen = ({location,history}) => {
     const {userInfo}=useSelector((s)=>s.userLogin)
 
     const {success}=useSelector((s)=>s.userUpdateProfile)
+
+    const {loading:loadingOrders,error:erorrOrders,orders}=useSelector((s)=>s.orderListMy)
    
     useEffect(()=>{
       if(!userInfo){
@@ -23,6 +26,8 @@ export const ProfileScreen = ({location,history}) => {
       }else{
         if(!user.name){
           dispatch(getUserDetails("profile"))
+          dispatch(listMyOrder())
+          // listMyOrder(dispatch)
         }else{
           setName(user.name)
           setEmail(user.email)
@@ -55,10 +60,38 @@ export const ProfileScreen = ({location,history}) => {
               <input type="text" placeholder='Enter password' onChange={(e)=>setPassword(e.target.value)} className="border border-yellow-700"></input>
               <label className='text-yellow-500'>Confirm Password</label>
               <input type="text" placeholder='Enter password' onChange={(e)=>setConfirmPassword(e.target.value)} className="border border-yellow-700"></input>
-              <button onClick={submitHandler} className="bg-yellow-500 text-yellow-800 px-4 py-2 hover:bg-yellow-300 my-4 mx-auto">UPDATE</button>
+              <button onClick={submitHandler} className="bg-yellow-400 px-4 py-2 hover:bg-yellow-200 my-4 mx-auto">UPDATE</button>
           </form>
         </div>
-        <h1 className='text-3xl text-yellow-500'>My Orders</h1>
+        <div>
+          <h1 className='text-3xl text-yellow-500'>My Orders</h1>
+          {loadingOrders ? <div>Loading...</div> : erorrOrders ? <div className='text-red-600'>{erorrOrders}</div> :
+          <table className='table-auto border-2 border-slate-500 my-4'>
+          <thead>
+            <tr>
+              <th className='border-2 border-slate-600 p-2'>ID</th>
+              <th className='border-2 border-slate-600 p-2 px-8'>DATE</th>
+              <th className='border-2 border-slate-600 p-2'>TOTAL</th>
+              <th className='border-2 border-slate-600 p-2 px-8'>PAID</th>
+              <th className='border-2 border-slate-600 p-2'>DELIVERED</th>
+              <th className='border-2 border-slate-600 p-2 px-8'></th>
+            </tr>
+          </thead>
+          <tbody>
+            {orders && orders.map((order)=>(
+              <tr key={order._id}>
+                <td className='border-2 border-slate-700 p-2'>{order._id.substring(18,)}</td>
+                <td className='border-2 border-slate-700 p-2'>{order.createdAt.substring(0,10)}</td>
+                <td className='border-2 border-slate-700 p-2'>{order.totalPrice}</td>
+                <td className='border-2 border-slate-700 p-2'>{order.isPaid ? order.paidAt.substring(0,10) : <i className='fas fa-times' style={{color:"red"}}></i>}</td>
+                <td className='border-2 border-slate-700 p-2'>{order.isDeliverd ? order.deliveredAt.substring(0,10) : <i className='fas fa-times' style={{color:"red"}}></i>}</td>
+                <td className='border-2 border-slate-700 p-2 '><Link to={`/order/${order._id}`} className='bg-yellow-400 hover:bg-yellow-200 py-2 px-3 rounded-lg'>Details</Link></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+          }         
+        </div>
     </div>
   )
 }

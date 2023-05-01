@@ -36,3 +36,30 @@ export const payOrder=(orderId,paymentResult)=>async(dispatch,getState)=>{
         dispatch({type:"ORDER_PAY_FAIL",payload:e.response&&e.message ? e.response.message : e.message})
     }
 }
+
+export const listMyOrder=()=>async(dispatch,getState)=>{
+    try{
+        dispatch({type:"ORDER_LIST_MY_REQUEST"})
+        const {userLogin:{userInfo}}=getState()
+        const config={headers:{Authorization:`Bearer ${userInfo.token}`}}
+        const {data}=await axios.get("http://localhost:5000/api/order/myorders",config)
+        dispatch({type:"ORDER_LIST_MY_SUCCESS",payload:data})
+    }catch(e){
+        dispatch({type:"ORDER_LIST_MY_FAIL",payload:e.response&&e.message ? e.response.message : e.message})
+    }
+}
+
+
+// export const listMyOrder2(){
+//     async(dispatch,getState){
+//         try{
+//             dispatch({type:"ORDER_LIST_MY_REQUEST"})
+//             const {userLogin:{userInfo}}=getState()
+//             const config={headers:{Authorization:`Bearer ${userInfo.token}`}}
+//             const {data}=await axios.get("http://localhost:5000/api/order/myorders",config)
+//             dispatch({type:"ORDER_LIST_MY_SUCCESS",payload:data})
+//         }catch(e){
+//             dispatch({type:"ORDER_LIST_MY_FAIL",payload:e.response&&e.message ? e.response.message : e.message})
+//         }
+//     }
+// }
