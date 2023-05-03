@@ -75,3 +75,15 @@ export const listUsers=()=>async(dispatch,getState)=>{
         dispatch({type:"USER_LIST_FAIL",payload:e.response&&e.message ? e.response.message : e.message})
     }
 }
+
+export const deleteUser=(id)=>async(dispatch,getState)=>{
+    try{
+        dispatch({type:"USER_DELETE_REQUEST"})
+        const {userLogin:{userInfo}}=getState()
+        const config={headers:{Authorization:`Bearer ${userInfo.token}`}}
+        const {data}=await axios.delete(`http://localhost:5000/api/user/${id}`,config)
+        dispatch({type:"USER_DELETE_SUCCESS"})
+    }catch(e){
+        dispatch({type:"USER_DELETE_FAIL",payload:e.response&&e.message ? e.response.message : e.message})
+    }
+}

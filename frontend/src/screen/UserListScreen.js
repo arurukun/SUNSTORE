@@ -1,17 +1,27 @@
 import React,{useEffect,useState} from 'react'
 import { useDispatch,useSelector } from 'react-redux'
-import { listUsers } from '../action/userAction'
+import { listUsers,deleteUser } from '../action/userAction'
 import { Link } from 'react-router-dom'
 
-export const UserListScreen = () => {
+export const UserListScreen = ({history}) => {
     const {loading,users,error}=useSelector((s)=>s.userList)
+    const {userInfo}=useSelector((s)=>s.userLogin)
+    const {success:successDelete}=useSelector((s)=>s.userDelete)
 
     const dispatch=useDispatch()
     useEffect(()=>{
+      if(userInfo && userInfo.isAdmin){
         dispatch(listUsers())
-    },[dispatch])
+      }else{
+        history.push("/login")
+      }
+    },[dispatch,history,successDelete,userInfo])
 
-    const deleteHandler=(id)=>{}
+    const deleteHandler=(id)=>{
+      if(window.confirm("Are you sure")){
+        dispatch(deleteUser(id))
+      }
+    }
   return (
     <div>
         <h1 className='text-3xl text-yellow-500'>Users</h1>
@@ -34,7 +44,7 @@ export const UserListScreen = () => {
           <td className='border-2 border-slate-700 p-2'><a href={`mailto:${user.email}`}>{user.email}</a></td>
           <td className='border-2 border-slate-700 p-2'>{user.isAdmin ? (<i className='fas fa-check' style={{color:"green"}}></i>) : (<i className='fas fa-times' style={{color:"red"}}></i>)}</td>
           <td className='border-2 border-slate-700 p-2'>
-            <Link to={`/user/${user._id}/edit`} className='bg-yellow-400 hover:bg-yellow-200 py-2 px-3 rounded-lg'><i className='fas fa-edit'></i></Link>
+            <Link to={`/admin//user/${user._id}/edit`} className='bg-yellow-400 hover:bg-yellow-200 py-2 px-3 rounded-lg'><i className='fas fa-edit'></i></Link>
             <button onClick={()=>deleteHandler(user._id)} className='bg-yellow-400 hover:bg-yellow-200 py-2 px-3 rounded-lg ml-2'><i className='fas fa-trash'></i></button>
           </td>
         </tr>
