@@ -28,7 +28,7 @@ const productSchema=Schema({
         required:true
     },
     category:{
-        type:Boolean,
+        type:String,
         required:true,
     },
     description:{

@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import {Link} from "react-router-dom"
 import {useDispatch,useSelector} from "react-redux"
-import {getUserDetails} from "../action/userAction"
+import {getUserDetails, updateUser} from "../action/userAction"
 
 export const UserEditScreen = ({match,history}) => {
     const userId=match.params.id
@@ -11,24 +11,36 @@ export const UserEditScreen = ({match,history}) => {
 
     const dispatch=useDispatch()
     const {loading,error,user}=useSelector((state)=>state.userDetails)
+    const {loading:loadingUpdate,error:errorUpdate,success:successUpdate}=useSelector((state)=>state.userUpdate)
     
     useEffect(()=>{
         if(user){
+        console.log(successUpdate)
+        console.log(user)
+            if(user && successUpdate){
+        console.log("suc")
+                dispatch({type:"USER_UPDATE_RESET"})
+            console.log(successUpdate)
 
-            if(user.name == null || user._id !== userId){
-                dispatch(getUserDetails(userId))
+                history.push("/admin/userlist")
             }else{
-                setName(user.name)
-                setEmail(user.email)
-                setAdmin(user.isAdmin)
-                // console.log(user.name)
+                if(user.name == null || user._id !== userId){
+                    dispatch(getUserDetails(userId))
+                }else{
+                    setName(user.name)
+                    setEmail(user.email)
+                    setAdmin(user.isAdmin)
+                    // console.log(user.name)
+                }
             }
+            
         }
-    },[dispatch,user,userId])    
+    },[dispatch,user,userId,successUpdate,history])    
 
     const submitHandler=(e)=>{
         e.preventDefault()
-     
+        dispatch(updateUser({_id:userId,name,email,isAdmin}))
+        history.push("/admin/userlist")
     }
   return (
     <div className='flex flex-col items-center justify-center border border-yellow-900 mt-10 pb-4 pt-2 md:w-2/5 mx-auto'>

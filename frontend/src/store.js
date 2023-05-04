@@ -3,14 +3,16 @@ import thunk from "redux-thunk"
 import  {composeWithDevTools} from "redux-devtools-extension"
 import { cartReducer } from "./reducer/cartReducer"
 
-import { productDetailsReducer, productListReducer } from "./reducer/productReducer"
-import { userDeleteReducer, userDetailsReducer, userListReducer, userLoginReducer, userRegisterReducer, userUpdateProfileReducer } from "./reducer/userReducer"
+import { productCreateReducer, productDeleteReducer, productDetailsReducer, productListReducer } from "./reducer/productReducer"
+import { userDeleteReducer, userDetailsReducer, userListReducer, userLoginReducer, userRegisterReducer, userUpdateProfileReducer, userUpdateReducer } from "./reducer/userReducer"
 import { orderCreateReducer, orderDetailsReducer, orderListMyReducer, orderPayReducer } from "./reducer/orderReducer"
 
 // const reducer=combineReducers({})
 const reducer=combineReducers({
     productList:productListReducer,
     productDetails:productDetailsReducer,
+    productDelete:productDeleteReducer,
+    productCreate:productCreateReducer,
     cart:cartReducer,
     userLogin:userLoginReducer,
     userRegister:userRegisterReducer,
@@ -18,6 +20,7 @@ const reducer=combineReducers({
     userUpdateProfile:userUpdateProfileReducer,
     userList:userListReducer,
     userDelete:userDeleteReducer,
+    userUpdate:userUpdateReducer,
     // userList:userListR, userListA, USER_LIST_LOD, USER_LIST_SUC, USER_LIST_ERR
     orderCreate:orderCreateReducer,
     orderDetails:orderDetailsReducer,

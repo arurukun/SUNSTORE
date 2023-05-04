@@ -24,7 +24,7 @@ export const UserListScreen = ({history}) => {
     }
   return (
     <div>
-        <h1 className='text-3xl text-yellow-500'>Users</h1>
+        <h1 className='text-3xl text-yellow-500 mt-4'>Users</h1>
         {loading ? <div>Loading...</div> : error ? <div className='text-red-600'>{error}</div> : 
     <table className='table-auto border-2 border-slate-500 my-4'>
     <thead>
