@@ -67,7 +67,7 @@ export const ProductListScreen = ({history}) => {
           {/* <td className='border-2 border-slate-700 p-2'>{product.category}</td> */}
           <td className='border-2 border-slate-700 p-2'>{product.brand}</td>
           <td className='border-2 border-slate-700 p-2 '>
-            <Link to={`/admin//product/${product._id}/edit`} className='bg-yellow-400 hover:bg-yellow-200 py-2 px-3 rounded-lg sm:ml-2'><i className='fas fa-edit'></i></Link>
+            <Link to={`/admin/product/${product._id}/edit`} className='bg-yellow-400 hover:bg-yellow-200 py-2 px-3 rounded-lg sm:ml-2'><i className='fas fa-edit'></i></Link>
             <button onClick={()=>deleteHandler(product._id)} className='bg-yellow-400 hover:bg-yellow-200 py-2 px-3 rounded-lg ml-2 sm:ml-2 sm:mt-2'><i className='fas fa-trash'></i></button>
           </td>
         </tr>

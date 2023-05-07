@@ -89,12 +89,15 @@ export const deleteUser=(id)=>async(dispatch,getState)=>{
 }
 
 export const updateUser=(user)=>async(dispatch,getState)=>{
+    console.log(user)
+
     try{
         dispatch({type:"USER_UPDATE_REQUEST"})
         const {userLogin:{userInfo}}=getState()
         const config={headers:{"content-type":"application/json",Authorization:`Bearer ${userInfo.token}`}}
+        console.log(user)
         const {data}=await axios.put(`http://localhost:5000/api/user/${user._id}`,user,config)
-        dispatch({type:"USER_UPDATE_SUCCESS"})
+        dispatch({type:"USER_UPDATE_SUCCESS",payload:data})
         dispatch({type:"USER_UPDATE_RESET",payload:data})
         console.log(data)
     }catch(e){

@@ -47,6 +47,8 @@ export const UserEditScreen = ({match,history}) => {
         <h1 className='text-3xl text-yellow-500'>Edit User</h1>
         {error && <div className='text-red-600 bg-red-300 w-full mt-4 text-center'>! {error}</div>}
         {loading && <div>Loading...</div>}
+        {/* {errorUpdate && <div className='text-red-600 bg-red-300 w-full mt-4 text-center'>! {errorUpdate}</div>} */}
+        {/* {loadingUpdate && <div>Loading...</div>} */}
         <form className='flex flex-col mt-2 w-full p-4'>
         <label className='text-yellow-500'>Name</label>
             <input type="text" placeholder='Enter name' value={name} onChange={(e)=>setName(e.target.value)} className="border border-yellow-700 "></input>

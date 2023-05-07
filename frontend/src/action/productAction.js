@@ -50,10 +50,27 @@ export const createProduct=()=>async(dispatch,getState)=>{
         dispatch({type:"PRODUCT_CREATE_REQUEST"})
         const {userLogin:{userInfo}}=getState()
         const config={headers:{Authorization:`Bearer ${userInfo.token}`}}
+        console.log("data")
         const {data}=await axios.post("http://localhost:5000/api/product",{},config)
         console.log(data)
         dispatch({type:"PRODUCT_CREATE_SUCCESS", payload:data})
     }catch(e){
         dispatch({type:"PRODUCT_CREATE_FAIL",payload:e.response&&e.message ? e.response.message : e.message})
+    }
+}
+
+export const updateProduct=(product)=>async(dispatch,getState)=>{
+    console.log(product)
+
+    try{
+        dispatch({type:"PRODUCT_UPDATE_REQUEST"})
+        const {userLogin:{userInfo}}=getState()
+        const config={"content-type":"application/json",headers:{Authorization:`Bearer ${userInfo.token}`}}
+        console.log(product)
+        const {data}=await axios.put(`http://localhost:5000/api/product/${product._id}`,product,config)
+        console.log(data)
+        dispatch({type:"PRODUCT_UPDATE_SUCCESS", payload:data})
+    }catch(e){
+        dispatch({type:"PRODUCT_UPDATE_FAIL",payload:e.response&&e.message ? e.response.message : e.message})
     }
 }

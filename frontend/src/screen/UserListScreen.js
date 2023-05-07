@@ -44,7 +44,7 @@ export const UserListScreen = ({history}) => {
           <td className='border-2 border-slate-700 p-2'><a href={`mailto:${user.email}`}>{user.email}</a></td>
           <td className='border-2 border-slate-700 p-2'>{user.isAdmin ? (<i className='fas fa-check' style={{color:"green"}}></i>) : (<i className='fas fa-times' style={{color:"red"}}></i>)}</td>
           <td className='border-2 border-slate-700 p-2'>
-            <Link to={`/admin//user/${user._id}/edit`} className='bg-yellow-400 hover:bg-yellow-200 py-2 px-3 rounded-lg'><i className='fas fa-edit'></i></Link>
+            <Link to={`/admin/user/${user._id}/edit`} className='bg-yellow-400 hover:bg-yellow-200 py-2 px-3 rounded-lg'><i className='fas fa-edit'></i></Link>
             <button onClick={()=>deleteHandler(user._id)} className='bg-yellow-400 hover:bg-yellow-200 py-2 px-3 rounded-lg ml-2'><i className='fas fa-trash'></i></button>
           </td>
         </tr>
