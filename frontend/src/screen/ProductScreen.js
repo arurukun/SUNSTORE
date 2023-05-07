@@ -36,7 +36,7 @@ const ProductScreen = ({history,match}) => {
         :
         <div className='grid md:grid-cols-10 grid-cols-1 gap-3 mt-12'>
         <div className='md:col-span-4'>
-          <img src={product.image} alt="" className='fluid' ></img>
+          <img src={'http://localhost:5000/static'+product.image} alt="" className='fluid' ></img>
         </div>
         <div className='md:col-span-4'>
           <div className='text-4xl mb-4'>{product.name}</div>

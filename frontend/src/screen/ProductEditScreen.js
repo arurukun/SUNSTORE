@@ -58,8 +58,15 @@ export const ProductEditScreen = ({match,history}) => {
             <input type="text" placeholder='Enter name' value={name} onChange={(e)=>setName(e.target.value)} className="border border-yellow-700 "></input>
             <label className='text-yellow-500'>Price</label>
             <input type="number" placeholder='Enter price' value={price} onChange={(e)=>setPrice(e.target.value)} className="border border-yellow-700 "></input>
-            <label className='text-yellow-500'>Image</label>
-            <input type="text" placeholder='Enter image' value={image} onChange={(e)=>setImage(e.target.value)} className="border border-yellow-700 "></input>            
+
+                <form action="/upload" method="POST" enctype="multipart/form-data" class="w-full max-w-lg mx-auto">
+                <div class="flex flex-wrap">
+                    <label for="image" class="text-yellow-500 p-1">
+                    Upload Image:
+                    </label>
+                    <input type="file" name="image" id="image" class="appearance-none rounded w-full py-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                </div>
+                </form>
             <label className='text-yellow-500'>Brand</label>
             <input type="text" placeholder='Enter brand' value={brand} onChange={(e)=>setBrand(e.target.value)} className="border border-yellow-700 "></input>            
             <label className='text-yellow-500'>category</label>
