@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react'
 import {Link} from "react-router-dom"
 import {useDispatch,useSelector} from "react-redux"
 import {listProductDetails,updateProduct} from "../action/productAction"
+import axios from 'axios'
 
 export const ProductEditScreen = ({match,history}) => {
     const productId=match.params.id
@@ -12,6 +13,8 @@ export const ProductEditScreen = ({match,history}) => {
     const [category,setCategory]=useState("")
     const [countInStock,setCountInStock]=useState("")
     const [description,setDescription]=useState("")
+
+    const [uploading,setUploading]=useState(false)
 
     const dispatch=useDispatch()
 
@@ -43,9 +46,27 @@ export const ProductEditScreen = ({match,history}) => {
 
     const submitHandler=(e)=>{
         e.preventDefault()
-        dispatch(updateProduct({_id:productId,name,price,image,brand,category,countInStock,}))
+        dispatch(updateProduct({_id:productId,name,price,image,brand,category,countInStock,description}))
         history.push("/admin/productlist")
     }
+
+    const uploadingHandler=async(e)=>{
+        const file=e.target.files[0]
+        // console.log(e.target.value)
+        const formDate=new FormData()
+        formDate.append("image",file)
+        setUploading(true)
+        try{
+            const config={headers:{"Content-Type":"multipart/form-data"}}
+            const {data}=await axios.post("http://localhost:5000/api/upload",formDate,config)
+            setImage(data)
+            setUploading(false)
+        }catch(e){
+            console.log(e)
+            setUploading(false)
+        }
+    }
+
   return (
     <div className='flex flex-col items-center justify-center border border-yellow-900 mt-10 pb-4 pt-2 md:w-2/5 mx-auto'>
         <h1 className='text-3xl text-yellow-500'>Edit Product</h1>
@@ -59,14 +80,14 @@ export const ProductEditScreen = ({match,history}) => {
             <label className='text-yellow-500'>Price</label>
             <input type="number" placeholder='Enter price' value={price} onChange={(e)=>setPrice(e.target.value)} className="border border-yellow-700 "></input>
 
-                <form action="/upload" method="POST" enctype="multipart/form-data" class="w-full max-w-lg mx-auto">
+            <form action="/upload" method="POST" encrtype="multipart/form-data" onChange={uploadingHandler} class="w-full max-w-lg mx-auto">
                 <div class="flex flex-wrap">
-                    <label for="image" class="text-yellow-500 p-1">
-                    Upload Image:
-                    </label>
-                    <input type="file" name="image" id="image" class="appearance-none rounded w-full py-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                    <label for="image" class="text-yellow-500 p-1">Upload Image:</label>
+                    <input type="file" name="image" id="image" 
+                            class="appearance-none rounded w-full py-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
                 </div>
-                </form>
+            </form>
+
             <label className='text-yellow-500'>Brand</label>
             <input type="text" placeholder='Enter brand' value={brand} onChange={(e)=>setBrand(e.target.value)} className="border border-yellow-700 "></input>            
             <label className='text-yellow-500'>category</label>
