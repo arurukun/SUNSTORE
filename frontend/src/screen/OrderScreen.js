@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import {useDispatch,useSelector } from "react-redux"
 import {Link} from "react-router-dom"
-import { getOrderDetails,payOrder } from '../action/orderAction'
+import { getOrderDetails,payOrder ,delivereOrder} from '../action/orderAction'
 import axios from 'axios'
 import {PayPalButton} from "react-paypal-button-v2"
 
@@ -12,6 +12,9 @@ export const OrderScreen = (props) => {
     const [sdkReady,setSdkReady]=useState(false)
     const orderPay=useSelector((s)=>s.orderPay)
     const {loading:loadingPay,success:successPay}=orderPay
+
+    const {loading:loadingDelivere,success:successDelivere}=useSelector((s)=>s.orderDelivere)
+    const {userInfo}=useSelector((s)=>s.userLogin)
 
     if(order){
         const addDecimals=(num)=>{
@@ -33,20 +36,25 @@ export const OrderScreen = (props) => {
             // console.log(sdkReady)
         }
         // addPayPalScript()
-        if(!order || successPay ) {
+        if(!order || successPay || successDelivere) {
         // if(!order || order._id !== orderId) {
             dispatch({type:"ORDER_PAY_RESET"})
+            dispatch({type:"ORDER_DELIVERE_RESET"})
             dispatch(getOrderDetails(orderId))
         }else if(!order.isPaid){
             if(!window.paypal){
                 addPayPalScript()
             }
         }
-    },[dispatch, orderId,successPay,order])
+    },[dispatch, orderId,successPay,successDelivere,order])
 
     const successPaymentHandler=(paymentResult)=>{
         console.log(paymentResult)
         dispatch(payOrder(orderId,paymentResult))
+    }
+
+    const delivereHandler=()=>{
+        dispatch(delivereOrder(order))
     }
 
   return(
@@ -62,7 +70,7 @@ export const OrderScreen = (props) => {
                 <p>Name:<strong>{order.user.name}</strong></p>
                 <p>Email:<strong>{order.user.email}</strong></p>
                 <p>Address:<strong>{order.shippingAddress.address},{order.shippingAddress.city},{order.shippingAddress.postalCode},{order.shippingAddress.country}</strong></p>
-                <div>{order.isDeliverd ? <div className='text-yellow-600 bg-yellow-300 mt-4  p-3'>Deliverd on {order.isDeliverd}</div> : <div className='text-red-600 bg-red-300 mt-4 p-3'>Not deliverd</div>}</div>
+                <div>{order.isDelivered ? <div className='text-yellow-600 bg-yellow-300 mt-4  p-3'>Deliverd on {order.isDeliverd}</div> : <div className='text-red-600 bg-red-300 mt-4 p-3'>Not deliverd</div>}</div>
             </div>
             <div className="p-6">
                 <h2 className='text-2xl text-yellow-500 mb-4'>Payment Method</h2>
@@ -120,6 +128,11 @@ export const OrderScreen = (props) => {
                         {sdkReady ? <div>Loading...</div> : <PayPalButton amount={order.totalPrice} onSuccess={successPaymentHandler}></PayPalButton>}
                     </div>
                 }
+                {userInfo && order.isPaid && ! order.isDelivered && (
+                    <div>
+                        <button onClick={delivereHandler} className='bg-yellow-500 text-yellow-800 px-4 py-2 hover:bg-yellow-300 my-4 mx-auto'>Mark As Delivered</button>
+                    </div>
+                )}
             </div>
         </div>
     </div>

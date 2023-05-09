@@ -27,6 +27,7 @@ app.use("/api/product",productRoutes)
 app.use("/api/user",userRoutes)
 app.use("/api/order",orderRoutes)
 app.use("/api/upload",uploadRoutes)
+
 const PORT=process.env.PORT || 5000
 app.listen(PORT,console.log(`This is ${PORT}`.rainbow))
 

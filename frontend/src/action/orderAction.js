@@ -49,6 +49,30 @@ export const listMyOrder=()=>async(dispatch,getState)=>{
     }
 }
 
+export const listOrder=()=>async(dispatch,getState)=>{
+    try{
+        dispatch({type:"ORDER_LIST_REQUEST"})
+        const {userLogin:{userInfo}}=getState()
+        const config={headers:{Authorization:`Bearer ${userInfo.token}`}}
+        const {data}=await axios.get("http://localhost:5000/api/order",config)
+        dispatch({type:"ORDER_LIST_SUCCESS",payload:data})
+    }catch(e){
+        dispatch({type:"ORDER_LIST_FAIL",payload:e.response&&e.message ? e.response.message : e.message})
+    }
+}
+
+export const delivereOrder=(order)=>async(dispatch,getState)=>{
+    try{
+        dispatch({type:"ORDER_DELIVERE_REQUEST"})
+        const {userLogin:{userInfo}}=getState()
+        const config={headers:{Authorization:`Bearer ${userInfo.token}`}}
+        const {data}=await axios.put(`http://localhost:5000/api/order/${order._id}/delivere`,{},config)
+        dispatch({type:"ORDER_DELIVERE_SUCCESS",payload:data})
+    }catch(e){
+        dispatch({type:"ORDER_DELIVERE_FAIL",payload:e.response&&e.message ? e.response.message : e.message})
+    }
+}
+
 
 // export const listMyOrder2(){
 //     async(dispatch,getState){
