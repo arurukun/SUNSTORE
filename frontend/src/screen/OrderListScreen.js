@@ -6,7 +6,6 @@ import { listOrder } from '../action/orderAction'
 export const OrderListScreen = ({history}) => {
     const {loading,orders,error}=useSelector((s)=>s.orderList)
     const {userInfo}=useSelector((s)=>s.userLogin)
-    // const {success:successDelete}=useSelector((s)=>s.orderDelete)
 
     const dispatch=useDispatch()
 
@@ -20,7 +19,6 @@ export const OrderListScreen = ({history}) => {
 
     const deleteHandler=(id)=>{
       if(window.confirm("Are you sure")){
-        // dispatch(deleteOrder(id))
       }
     }
   return (
@@ -49,7 +47,7 @@ export const OrderListScreen = ({history}) => {
           <td className='border-2 border-slate-700 p-2'>{order.isPaid ? (order.paidAt.substring(0,10)) : (<i className='fas fa-times' style={{color:"red"}}></i>)}</td>
           <td className='border-2 border-slate-700 p-2'>{order.isDelivered ? (order.deliveredAt.substring(0,10)) : (<i className='fas fa-times' style={{color:"red"}}></i>)}</td>
           <td className='border-2 border-slate-700 p-2'>
-            <Link to={`/order/${order._id}/edit`} className='bg-yellow-400 hover:bg-yellow-200 py-2 px-3 rounded-lg'><button className='bg-yellow-400 hover:bg-yellow-200 py-2 px-3 rounded-lg ml-2'>Details</button></Link>
+            <Link to={`/order/${order._id}/edit`}><button className='bg-yellow-400 hover:bg-yellow-200 py-2 px-3 rounded-lg ml-2'>Details</button></Link>
             {/* <button onClick={()=>deleteHandler(order._id)} className='bg-yellow-400 hover:bg-yellow-200 py-2 px-3 rounded-lg ml-2'><i className='fas fa-trash'></i></button> */}
           </td>
         </tr>

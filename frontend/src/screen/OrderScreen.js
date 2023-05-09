@@ -133,7 +133,7 @@ export const OrderScreen = (props,{history}) => {
                 }
                 {userInfo && userInfo.isAdmin && order.isPaid && ! order.isDelivered && (
                     <div>
-                        <button onClick={delivereHandler} className='bg-yellow-500 text-yellow-800 px-4 py-2 hover:bg-yellow-300 my-4 mx-auto'>Mark As Delivered</button>
+                        <button onClick={delivereHandler} className='bg-yellow-500 text-yellow-800 px-4 py-2 hover:bg-yellow-300 my-4 mx-auto w-full'>Mark As Delivered</button>
                     </div>
                 )}
             </div>
