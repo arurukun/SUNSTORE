@@ -5,7 +5,7 @@ import { getOrderDetails,payOrder ,delivereOrder} from '../action/orderAction'
 import axios from 'axios'
 import {PayPalButton} from "react-paypal-button-v2"
 
-export const OrderScreen = (props) => {
+export const OrderScreen = (props,{history}) => {
     const orderId=props.match.params.id
     const {loading,order,error}=useSelector((s)=>s.orderDetails)
 
@@ -25,6 +25,9 @@ export const OrderScreen = (props) => {
     // console.log(order)
     const dispatch=useDispatch()
     useEffect(()=>{
+        if(!userInfo){
+            history.push("/login")
+        }
         const addPayPalScript=async()=>{
             const {data:clientId}=await axios.get("http://localhost:5000/api/config/paypal")
             const script=document.createElement("script")
@@ -128,7 +131,7 @@ export const OrderScreen = (props) => {
                         {sdkReady ? <div>Loading...</div> : <PayPalButton amount={order.totalPrice} onSuccess={successPaymentHandler}></PayPalButton>}
                     </div>
                 }
-                {userInfo && order.isPaid && ! order.isDelivered && (
+                {userInfo && userInfo.isAdmin && order.isPaid && ! order.isDelivered && (
                     <div>
                         <button onClick={delivereHandler} className='bg-yellow-500 text-yellow-800 px-4 py-2 hover:bg-yellow-300 my-4 mx-auto'>Mark As Delivered</button>
                     </div>
