@@ -74,3 +74,15 @@ export const updateProduct=(product)=>async(dispatch,getState)=>{
         dispatch({type:"PRODUCT_UPDATE_FAIL",payload:e.response&&e.message ? e.response.message : e.message})
     }
 }
+
+export const createProductReview=(productId,review)=>async(dispatch,getState)=>{
+    try{
+        dispatch({type:"PRODUCT_CREATE_REVIEW_REQUEST"})
+        const {userLogin:{userInfo}}=getState()
+        const config={"content-type":"application/json",headers:{Authorization:`Bearer ${userInfo.token}`}}
+        await axios.post(`http://localhost:5000/api/product/${productId}/reviews`,review,config)
+        dispatch({type:"PRODUCT_CREATE_REVIEW_SUCCESS"})
+    }catch(e){
+        dispatch({type:"PRODUCT_CREATE_REVIEW_FAIL",payload:e.response&&e.message ? e.response.message : e.message})
+    }
+}
