@@ -29,7 +29,6 @@ function App() {
           <Header />
         }
 } */}
-        <Route path="/" component={HomeScreen} exact/>
         <Route path="/product/:yu" component={ProductScreen}/>
         <Route path="/cart/:yu?" component={CartScreen} />
         <Route path="/login" component={LoginScreen}/>
@@ -44,6 +43,8 @@ function App() {
         <Route path="/admin/userlist" component={UserListScreen}/>
         <Route path="/admin/productlist" component={ProductListScreen}/>
         <Route path="/admin/orderlist" component={OrderListScreen}/>
+        <Route path="/search/:keyword" component={HomeScreen}/>
+        <Route path="/" component={HomeScreen} exact/>
 
       </main>
       <Footer/>

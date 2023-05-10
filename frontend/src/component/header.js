@@ -4,8 +4,8 @@ import DropdownMenu from './Dropdown'
 
 import {useDispatch,useSelector} from "react-redux"
 import { logout } from '../action/userAction'
-
-
+import { SearchBox } from './SearchBox'
+import { Route } from 'react-router-dom'
 
 const Header = () => {
   const dispatch=useDispatch()
@@ -24,10 +24,15 @@ const Header = () => {
     <header>
       <div className='bg-yellow-500 text-white py-5 border-b-amber-900 border-b-2'>
         <div className='container flex justify-between'>
-          <Link to="/">
-          <h2 className='text-xl font-semibold text-amber-900 hover:text-amber-700 transition'>SUNSTORE</h2>
-          </Link>
-          <div className='flex space-x-8'>
+          <div className='flex space-x-16'>
+            <Link to="/">
+            <h2 className='sm:text-xl md:text-2xl font-semibold text-amber-900 hover:text-amber-700 transition'>SUNSTORE</h2>
+            </Link>
+            <Route render={({history})=><SearchBox history={history} />} />
+          </div>
+
+          <div className='flex space-x-8 md:justify-between'>
+            {/* <SearchBox /> */}
             <Link to="/cart" className='text-xs flex self-center'><i className='fas fa-shopping-cart'></i> CART</Link>
             {userInfo ? 
             // <DropdownMenu header={userInfo.name} list={["Profile", "Logout"]} onChange={logoutHandler}/>

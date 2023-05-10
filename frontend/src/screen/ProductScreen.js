@@ -108,7 +108,7 @@ const ProductScreen = ({history,match}) => {
           <h2 className='text-2xl mb-2'>Review</h2>
           {product && product.reviews && product.reviews.length == 0 && <div>No Reviews</div>}
         </div>
-        <div className='ml-4 divide-y-2'>
+        <div className='ml-4 divide-y-2 md:w-5/12'>
           {product && product.reviews && product.reviews.map((review)=>(
             <div key={review._id}>
               <p className='text-sm'>{review.name}</p>
@@ -127,7 +127,7 @@ const ProductScreen = ({history,match}) => {
             <h2 className='text-2xl mb-2 p-2'>Write a Customer Review</h2>
             {errorProductReview && <div>{errorProductReview}</div>}
             {userInfo ? 
-            (<form onSubmit={submitHandler} className='flex flex-col md:w-2/5'>
+            (<form onSubmit={submitHandler} className='flex flex-col'>
               <label className='mb-1'>Rating</label>
               <select value={rating} onChange={(e)=>setRating(e.target.value)} className='border-2'>
                 <option value="">Select...</option>

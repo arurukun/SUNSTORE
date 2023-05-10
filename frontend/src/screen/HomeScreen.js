@@ -5,8 +5,9 @@ import { Link } from 'react-router-dom'
 import {useDispatch,useSelector} from "react-redux"
 import { listProducts } from '../action/productAction'
 
-const HomeScreen = () => {
+const HomeScreen = ({match}) => {
     // const [products, setProducts] = useState([])
+    const keyword=match.params.keyword
     const dispatch=useDispatch()
 
     const productList=useSelector(state=>state.productList)
@@ -22,9 +23,8 @@ const HomeScreen = () => {
 //         } 
 //         callItem()
 
-
-        dispatch(listProducts())
-    },[dispatch])
+        dispatch(listProducts(keyword))
+    },[dispatch,keyword])
 
 
   return (
