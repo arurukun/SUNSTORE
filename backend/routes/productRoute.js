@@ -1,7 +1,7 @@
 import express from "express"
 const router=express.Router()
 
-// import Product from "../Data/models/productModel.js"
+// import Product from "../data/models/productModel.js"
 import { getProducts,getProductById, deleteProduct, createProduct, updateProduct, createProductReview } from "../controllers/productController.js"
 import {protect,admin} from "../middleware/authMiddleware.js"
 
