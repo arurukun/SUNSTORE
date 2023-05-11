@@ -1,6 +1,6 @@
 import express from "express"
 import dotenv from "dotenv"
-import connect from "./Data/mongoose.js"
+import connect from "./data/mongoose.js"
 import cors from "cors"
 import colors from "colors"
 import path from "path"
