@@ -23,7 +23,7 @@ export const ProductEditScreen = ({match,history}) => {
 
     useEffect(()=>{
         if(product){
-            // console.log(product)
+// console.log(product)
             if(product && successUpdate){
                 dispatch({type:"PRODUCT_UPDATE_RESET"})
                 history.push("/admin/productlist")
@@ -52,17 +52,17 @@ export const ProductEditScreen = ({match,history}) => {
 
     const uploadingHandler=async(e)=>{
         const file=e.target.files[0]
-        // console.log(e.target.value)
+// console.log(e.target.value)
         const formDate=new FormData()
         formDate.append("image",file)
         setUploading(true)
         try{
             const config={headers:{"Content-Type":"multipart/form-data"}}
-            const {data}=await axios.post("http://localhost:5000/api/upload",formDate,config)
+            const {data}=await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/upload`,formDate,config)
             setImage(data)
             setUploading(false)
         }catch(e){
-            console.log(e)
+// console.log(e)
             setUploading(false)
         }
     }

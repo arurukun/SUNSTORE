@@ -36,7 +36,8 @@ export const LoginScreen = ({location,history}) => {
             <button onClick={submitHandler} className="bg-yellow-500 text-yellow-800 px-4 py-2 hover:bg-yellow-300 my-4 mx-auto">SIGN IN</button>
         </form>
         <p className='text-yellow-500'>New customer?  
-            <a href={redirect ? `http://localhost:3000/register?redirect=${redirect}`:"/register"} className="hover:border-yellow-800 hover:border-b-2 text-yellow-700">Register</a>
+            <Link to={redirect ? `/register?redirect=${redirect}`:"/register"} className="hover:border-yellow-800 hover:border-b-2 text-yellow-700">Register</Link>
+            {/* <a href={redirect ? `http://localhost:3000/register?redirect=${redirect}`:"http://localhost:3000/register"} className="hover:border-yellow-800 hover:border-b-2 text-yellow-700">Register</a> */}
         </p>
     </div>
   )

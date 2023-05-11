@@ -60,7 +60,7 @@ export const productCreateReducer=(state={},action)=>{
         case "PRODUCT_CREATE_REQUEST":
             return{loading:true}
         case "PRODUCT_CREATE_SUCCESS":
-            console.log(action.payload)
+// console.log(action.payload)
             return{loading:false,success:true,product:action.payload}
         case "PRODUCT_CREATE_FAIL":
             return{loading:false,error:action.payload}
@@ -76,7 +76,7 @@ export const productUpdateReducer=(state={product:{}},action)=>{
         case "PRODUCT_UPDATE_REQUEST":
             return{loading:true}
         case "PRODUCT_UPDATE_SUCCESS":
-            console.log(action.type)
+// console.log(action.type)
             return{loading:false,success:true,product:action.payload}
         case "PRODUCT_UPDATE_FAIL":
             return{loading:false,error:action.payload}

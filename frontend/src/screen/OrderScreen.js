@@ -22,21 +22,21 @@ export const OrderScreen = (props,{history}) => {
         }
         order.itemsPrice=addDecimals(order.orderItems.reduce((acc,item)=>acc+item.price*item.qty,0))
     }
-    // console.log(order)
+// console.log(order)
     const dispatch=useDispatch()
     useEffect(()=>{
         if(!userInfo){
             history.push("/login")
         }
         const addPayPalScript=async()=>{
-            const {data:clientId}=await axios.get("http://localhost:5000/api/config/paypal")
+            const {data:clientId}=await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/config/paypal`)
             const script=document.createElement("script")
             script.type="text/javescript"
             script.src=`https://www.paypal.com/sdk/js?client-id=${clientId}`
             script.async=true
             script.onload=()=>{setSdkReady(true)}
             document.body.appendChild(script)
-            // console.log(sdkReady)
+// console.log(sdkReady)
         }
         // addPayPalScript()
         if(!order || successPay || successDelivere) {
@@ -52,7 +52,7 @@ export const OrderScreen = (props,{history}) => {
     },[dispatch, orderId,successPay,successDelivere,order])
 
     const successPaymentHandler=(paymentResult)=>{
-        console.log(paymentResult)
+// console.log(paymentResult)
         dispatch(payOrder(orderId,paymentResult))
     }
 
@@ -87,7 +87,7 @@ export const OrderScreen = (props,{history}) => {
                 <div>
                     {order.orderItems.map((item,index)=>(
                         <div kye={index} className='md:flex md:flex-row p-2 divide-y divide-yellow-400'>
-                            <img src={'http://localhost:5000/static'+item.image} alt={item.name} className='w-20 h-20 mr-4'></img>
+                            <img src={'/static'+item.image} alt={item.name} className='w-20 h-20 mr-4'></img>
                             <Link to={`/product/${item.product}`} className='md:grid md:grid-cols-3 gap-6'>
                                 <div>{item.name}</div>
                                 <div>{item.qty}×${item.price}=${item.qty*item.price}</div>

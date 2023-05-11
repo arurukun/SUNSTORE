@@ -16,7 +16,7 @@ const addOrderItems=asyncHandler(async(req,res)=>{
 const getOrderById=asyncHandler(async(req,res)=>{
     // const order=await Order.findById(req.params.id)
     const order=await Order.findById(req.params.id).populate("user","name email")
-    console.log(order)
+// console.log(order)
     if(order){
         res.json(order)
     }else{
@@ -46,7 +46,7 @@ const updateOrderToPaid=asyncHandler(async(req,res)=>{
 const getMyOrders=asyncHandler(async(req,res)=>{
     const orders=await Order.find({user:req.user._id})
     res.json(orders)
-    // console.log(orders)
+// console.log(orders)
 })
 
 const getOrders=asyncHandler(async(req,res)=>{
@@ -56,7 +56,7 @@ const getOrders=asyncHandler(async(req,res)=>{
 
 const updateOrderToDelivered=asyncHandler(async(req,res)=>{
     const order=await Order.findById(req.params.id)
-    console.log(order)
+// console.log(order)
     if(order){
         order.isDelivered=true,
         order.deliveredAt=Date.now()

@@ -5,7 +5,7 @@ function DropdownMenu(props) {
     const [isOpen, setIsOpen] = useState(false);
     
     const logoutHandler=()=>{
-      console.log("logout")
+// console.log("logout")
     }
   function toggleMenu() {
     setIsOpen(!isOpen);

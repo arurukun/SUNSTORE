@@ -10,20 +10,20 @@ export const CartScreen = ({match,location,history}) => {
 
   const cart=useSelector(state=>state.cart)
   const {cartItems} =cart
-  console.log(cartItems+" cartItems")
+// console.log(cartItems+" cartItems")
 
   useEffect(()=>{
     if(productId){
-      console.log(qty)
+// console.log(qty)
       dispatch(addToCart(productId,qty))
     }
   },[dispatch,productId,qty])
 
   const removeFromCartHandler=(yu)=>{
-    console.log(yu)
+// console.log(yu)
     dispatch(removeFromCart(yu))
   }
-  console.log([...Array(7).keys()])
+// console.log([...Array(7).keys()])
 
   const checkoutHandler=()=>{
     history.push("/login?redirect=shipping")
@@ -38,7 +38,7 @@ export const CartScreen = ({match,location,history}) => {
       <div>{cartItems.map(item=>(
       <div key={item.product} className="md:flex md:flex-row mb-6 divide-y-2">
         <div className='md:grid md:grid-cols-5 '>
-          <img src={'http://localhost:5000/static'+item.image} className="md:w-40 h-32"></img>
+          <img src={'/static'+item.image} className="md:w-40 h-32"></img>
           <div className='text-xl'>{item.name}</div>
           <div>${item.price}</div>
           <select value={item.qty} onChange={(e)=>dispatch(addToCart(item.product,Number(e.target.value)))} className="md:w-3/5 md:h-1/4 border border-black ">

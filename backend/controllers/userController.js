@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken"
 
 const authUser=asyncHandler(async(req,res)=>{
     const {email,password:pass}=req.body
-    console.log(email)
+// console.log(email)
     // res.json({email,password})
     const user=await User.findOne({email})
     if(user && (await bcrypt.compare(pass,user.password))){
@@ -53,7 +53,7 @@ const getUserProfile=asyncHandler(async(req,res)=>{
 
 const updateUserProfile=asyncHandler(async(req,res)=>{
     const user=await User.findById(req.user._id)
-    console.log(user)
+// console.log(user)
     if(user){
         user.name=req.body.name || user.name
         user.email=req.body.email || user.email
@@ -99,7 +99,7 @@ const getUserById=asyncHandler(async(req,res)=>{
 
 const updateUser=asyncHandler(async(req,res)=>{
     const user=await User.findById(req.params.yu)
-    console.log(user)
+// console.log(user)
     if(user){
         user.name=req.body.name || user.name
         user.email=req.body.email || user.email

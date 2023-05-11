@@ -14,9 +14,9 @@ export const ProductListScreen = ({history}) => {
       if(!userInfo){
         history.push("/login")
       }
-      console.log(successCreate)
+// console.log(successCreate)
       if(userInfo && successCreate){
-        console.log(createdProduct)
+// console.log(createdProduct)
         // history.push(`/admin/product/${createdProduct}/edit`)
       }else{
         dispatch(listProducts())
@@ -33,7 +33,7 @@ export const ProductListScreen = ({history}) => {
       }
     }
 
-    // console.log(products)
+// console.log(products)
   return (
     <div>
         <div className='flex flex-row justify-between mt-4'>

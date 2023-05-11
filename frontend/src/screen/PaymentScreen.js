@@ -3,7 +3,7 @@ import {useDispatch,useSelector} from "react-redux"
 import { savePaymentMethot } from '../action/cartAction'
 
 export const PaymentScreen = ({history}) => {
-    console.log("hi")
+// console.log("hi")
   const {shippingAddress}=useSelector(state=>state.cart)
 
   if(!shippingAddress){

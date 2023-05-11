@@ -6,7 +6,9 @@
 /backend/.env
 /.pnp
 .pnp.js
-test.java
+/test.java
+/Test.py
+/Test2.java
 # testing
 /coverage
 

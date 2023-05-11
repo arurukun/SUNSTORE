@@ -6,7 +6,7 @@ export const createOrder=(order)=>async(dispatch,getState)=>{
         dispatch({type:ORDER_CREATE_REQUEST})
         const {userLogin:{userInfo}}=getState()
         const config={headers:{"content-type":"application/json",Authorization:`Bearer ${userInfo.token}`}}
-        const {data}=await axios.post("http://localhost:5000/api/order",order,config)
+        const {data}=await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/order`,order,config)
         dispatch({type:ORDER_CREATE_SUCCESS,payload:data})
     }catch(e){
         dispatch({type:ORDER_CREATE_FAIL,payload:e.response&&e.message ? e.response.message : e.message})
@@ -18,7 +18,7 @@ export const getOrderDetails=(id)=>async(dispatch,getState)=>{
         dispatch({type:"ORDER_DETAILS_REQUEST"})
         const {userLogin:{userInfo}}=getState()
         const config={headers:{Authorization:`Bearer ${userInfo.token}`}}
-        const {data}=await axios.get(`http://localhost:5000/api/order/${id}`,config)
+        const {data}=await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/order/${id}`,config)
         dispatch({type:"ORDER_DETAILS_SUCCESS",payload:data})
     }catch(e){
         dispatch({type:"ORDER_DETAILS_FAIL",payload:e.response&&e.message ? e.response.message : e.message})
@@ -30,7 +30,7 @@ export const payOrder=(orderId,paymentResult)=>async(dispatch,getState)=>{
         dispatch({type:"ORDER_PAY_REQUEST"})
         const {userLogin:{userInfo}}=getState()
         const config={headers:{"Content-Type":"application/json",Authorization:`Bearer ${userInfo.token}`}}
-        const {data}=await axios.put(`http://localhost:5000/api/order/${orderId}/pay`,paymentResult,config)
+        const {data}=await axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/order/${orderId}/pay`,paymentResult,config)
         dispatch({type:"ORDER_PAY_SUCCESS",payload:data})
     }catch(e){
         dispatch({type:"ORDER_PAY_FAIL",payload:e.response&&e.message ? e.response.message : e.message})
@@ -42,7 +42,7 @@ export const listMyOrder=()=>async(dispatch,getState)=>{
         dispatch({type:"ORDER_LIST_MY_REQUEST"})
         const {userLogin:{userInfo}}=getState()
         const config={headers:{Authorization:`Bearer ${userInfo.token}`}}
-        const {data}=await axios.get("http://localhost:5000/api/order/myorders",config)
+        const {data}=await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/order/myorders`,config)
         dispatch({type:"ORDER_LIST_MY_SUCCESS",payload:data})
     }catch(e){
         dispatch({type:"ORDER_LIST_MY_FAIL",payload:e.response&&e.message ? e.response.message : e.message})
@@ -54,7 +54,7 @@ export const listOrder=()=>async(dispatch,getState)=>{
         dispatch({type:"ORDER_LIST_REQUEST"})
         const {userLogin:{userInfo}}=getState()
         const config={headers:{Authorization:`Bearer ${userInfo.token}`}}
-        const {data}=await axios.get("http://localhost:5000/api/order",config)
+        const {data}=await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/order`,config)
         dispatch({type:"ORDER_LIST_SUCCESS",payload:data})
     }catch(e){
         dispatch({type:"ORDER_LIST_FAIL",payload:e.response&&e.message ? e.response.message : e.message})
@@ -66,7 +66,7 @@ export const delivereOrder=(order)=>async(dispatch,getState)=>{
         dispatch({type:"ORDER_DELIVERE_REQUEST"})
         const {userLogin:{userInfo}}=getState()
         const config={headers:{Authorization:`Bearer ${userInfo.token}`}}
-        const {data}=await axios.put(`http://localhost:5000/api/order/${order._id}/delivere`,{},config)
+        const {data}=await axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/order/${order._id}/delivere`,{},config)
         dispatch({type:"ORDER_DELIVERE_SUCCESS",payload:data})
     }catch(e){
         dispatch({type:"ORDER_DELIVERE_FAIL",payload:e.response&&e.message ? e.response.message : e.message})
@@ -80,7 +80,7 @@ export const delivereOrder=(order)=>async(dispatch,getState)=>{
 //             dispatch({type:"ORDER_LIST_MY_REQUEST"})
 //             const {userLogin:{userInfo}}=getState()
 //             const config={headers:{Authorization:`Bearer ${userInfo.token}`}}
-//             const {data}=await axios.get("http://localhost:5000/api/order/myorders",config)
+//             const {data}=await axios.get("/api/order/myorders",config)
 //             dispatch({type:"ORDER_LIST_MY_SUCCESS",payload:data})
 //         }catch(e){
 //             dispatch({type:"ORDER_LIST_MY_FAIL",payload:e.response&&e.message ? e.response.message : e.message})

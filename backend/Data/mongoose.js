@@ -8,9 +8,9 @@ const connected=async ()=>{
             useUnifiedTopology:true,
             useNewUrlParser:true
         })
-        console.log(`Connected to conn.connection.host: ${conn.connection.host}`.rainbow)
+// console.log(`Connected to conn.connection.host: ${conn.connection.host}`.rainbow)
     }catch(error){
-        console.log(error.message.red)
+// console.log(error.message.red)
     }
 }
 

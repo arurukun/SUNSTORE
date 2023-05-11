@@ -25,8 +25,8 @@ export const RegisterScreen = ({location,history}) => {
     const submitHandler=(e)=>{
         e.preventDefault()
         if(password !== confirmPassword){
-            console.log(password)
-            console.log(confirmPassword)
+// console.log(password)
+// console.log(confirmPassword)
             setMessage("Passwords do not match")
         }else{
             dispatch(register(name,email,password))
@@ -50,7 +50,8 @@ export const RegisterScreen = ({location,history}) => {
             <button onClick={submitHandler} className="bg-yellow-500 text-yellow-800 px-4 py-2 hover:bg-yellow-300 my-4 mx-auto">REGISTER</button>
         </form>
         <p className='text-yellow-500'>Have an Account?  
-            <a href={redirect ? `http://localhost:3000/login?redirect=${redirect}`:"/login"} className="hover:border-yellow-800 hover:border-b-2 text-yellow-700">Login</a>
+            <Link to={redirect ? `/login?redirect=${redirect}`:"/login"} className="hover:border-yellow-800 hover:border-b-2 text-yellow-700">Login</Link>
+            {/* <a href={redirect ? `http://localhost:3000/login?redirect=${redirect}`:"/login"} className="hover:border-yellow-800 hover:border-b-2 text-yellow-700">Login</a> */}
         </p>
     </div>
   )

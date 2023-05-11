@@ -15,12 +15,12 @@ export const UserEditScreen = ({match,history}) => {
     
     useEffect(()=>{
         if(user){
-        console.log(successUpdate)
-        console.log(user)
+// console.log(successUpdate)
+// console.log(user)
             if(user && successUpdate){
-        console.log("suc")
+// console.log("suc")
                 dispatch({type:"USER_UPDATE_RESET"})
-            console.log(successUpdate)
+// console.log(successUpdate)
 
                 history.push("/admin/userlist")
             }else{
@@ -30,7 +30,7 @@ export const UserEditScreen = ({match,history}) => {
                     setName(user.name)
                     setEmail(user.email)
                     setAdmin(user.isAdmin)
-                    // console.log(user.name)
+// console.log(user.name)
                 }
             }
             

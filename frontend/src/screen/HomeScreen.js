@@ -18,7 +18,7 @@ const HomeScreen = ({match}) => {
 // //          response comes = request goes
 //             const res      = await axios.get("/api/product")
 
-//             console.log(res)
+// console.log(res)
 //             setProducts(res.data)
 //         } 
 //         callItem()
@@ -38,9 +38,8 @@ const HomeScreen = ({match}) => {
         <div className='grid md:grid-cols-4 gap-4 mb-4 sm:grid-cols-1'>{products.map((item)=>{
             return (
                 <div className=' border border-black p-2'>
-                    {/* <a href={`http://localhost:3000/product/${item._id}`}> */}
                     <Link to={"/product/" + item._id}>
-                        <img src={'http://localhost:5000/static'+item.image}></img>
+                        <img src={'/static'+item.image}></img>
                         <div className='text-2xl mt-2'>{item.name}</div>
                     </Link>
                     <div className='text-sm my-2'>{item.price}</div>
@@ -63,17 +62,4 @@ const HomeScreen = ({match}) => {
   )
 }
 
-// {
-//     _id: '6',
-//     name: 'Amazon Echo Dot 3rd Generation',
-//     image: '/images/alexa.jpg',
-//     description:
-//       'Meet Echo Dot - Our most popular smart speaker with a fabric design. It is our most compact smart speaker that fits perfectly into small space',
-//     brand: 'Amazon',
-//     category: 'Electronics',
-//     price: 29.99,
-//     countInStock: 0,
-//     rating: 4,
-//     numReviews: 12,
-//   },
 export default HomeScreen
