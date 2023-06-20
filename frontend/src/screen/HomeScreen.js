@@ -39,7 +39,7 @@ const HomeScreen = ({match}) => {
             return (
                 <div className=' border border-black p-2'>
                     <Link to={"/product/" + item._id}>
-                        <img src={'/static'+item.image}></img>
+                        <img src={`${process.env.REACT_APP_BACKEND_URL}/static`+item.image}></img>
                         <div className='text-2xl mt-2'>{item.name}</div>
                     </Link>
                     <div className='text-sm my-2'>{item.price}</div>

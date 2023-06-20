@@ -21,7 +21,7 @@ export const LoginScreen = ({location,history}) => {
 
     const submitHandler=(e)=>{
         e.preventDefault()
-        dispatch(login(email,password))
+        dispatch(login(email,password)) 
     }
   return (
     <div className='flex flex-col items-center justify-center border border-yellow-900 mt-10 pb-4 pt-2 md:w-2/5 mx-auto'>
@@ -32,7 +32,7 @@ export const LoginScreen = ({location,history}) => {
             <label className='text-yellow-500'>Email Address</label>
             <input type="text" placeholder='Enter email' onChange={(e)=>setEmail(e.target.value)} className="border border-yellow-700 "></input>
             <label className='text-yellow-500'>Password</label>
-            <input type="text" placeholder='Enter password' onChange={(e)=>setPassword(e.target.value)} className="border border-yellow-700"></input>
+            <input type="password" placeholder='Enter password' onChange={(e)=>setPassword(e.target.value)} className="border border-yellow-700"></input>
             <button onClick={submitHandler} className="bg-yellow-500 text-yellow-800 px-4 py-2 hover:bg-yellow-300 my-4 mx-auto">SIGN IN</button>
         </form>
         <p className='text-yellow-500'>New customer?  

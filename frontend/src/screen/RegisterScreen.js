@@ -44,9 +44,9 @@ export const RegisterScreen = ({location,history}) => {
             <label className='text-yellow-500'>Email Address</label>
             <input type="text" placeholder='Enter email' onChange={(e)=>setEmail(e.target.value)} className="border border-yellow-700 "></input>
             <label className='text-yellow-500'>Password</label>
-            <input type="text" placeholder='Enter password' onChange={(e)=>setPassword(e.target.value)} className="border border-yellow-700"></input>
+            <input type="password" placeholder='Enter password' onChange={(e)=>setPassword(e.target.value)} className="border border-yellow-700"></input>
             <label className='text-yellow-500'>Confirm Password</label>
-            <input type="text" placeholder='Enter password' onChange={(e)=>setConfirmPassword(e.target.value)} className="border border-yellow-700"></input>
+            <input type="password" placeholder='Enter password' onChange={(e)=>setConfirmPassword(e.target.value)} className="border border-yellow-700"></input>
             <button onClick={submitHandler} className="bg-yellow-500 text-yellow-800 px-4 py-2 hover:bg-yellow-300 my-4 mx-auto">REGISTER</button>
         </form>
         <p className='text-yellow-500'>Have an Account?  

@@ -38,7 +38,7 @@ export const CartScreen = ({match,location,history}) => {
       <div>{cartItems.map(item=>(
       <div key={item.product} className="md:flex md:flex-row mb-6 divide-y-2">
         <div className='md:grid md:grid-cols-5 '>
-          <img src={'/static'+item.image} className="md:w-40 h-32"></img>
+          <img src={`${process.env.REACT_APP_BACKEND_URL}/static`+item.image} className="md:w-40 h-32"></img>
           <div className='text-xl'>{item.name}</div>
           <div>${item.price}</div>
           <select value={item.qty} onChange={(e)=>dispatch(addToCart(item.product,Number(e.target.value)))} className="md:w-3/5 md:h-1/4 border border-black ">

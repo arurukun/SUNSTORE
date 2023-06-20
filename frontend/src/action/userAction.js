@@ -28,8 +28,8 @@ export const register=(name,email,password)=>async(dispatch)=>{
         const config={headers:{"constent-type":"application/json"}}
 // console.log(email)
         const {data}=await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/user`,{name,email,password},config)
-        // dispatch({type:USER_REGISTER_SUCCESS,payload:data})
         dispatch({type:USER_REGISTER_SUCCESS,payload:data})
+        dispatch({type:USER_LOGIN_SUCCESS,payload:data})
         localStorage.setItem("userInfo",JSON.stringify(data))
     }catch(e){
 // console.log(e.response.statusText)

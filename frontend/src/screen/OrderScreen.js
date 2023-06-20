@@ -87,7 +87,7 @@ export const OrderScreen = (props,{history}) => {
                 <div>
                     {order.orderItems.map((item,index)=>(
                         <div kye={index} className='md:flex md:flex-row p-2 divide-y divide-yellow-400'>
-                            <img src={'/static'+item.image} alt={item.name} className='w-20 h-20 mr-4'></img>
+                            <img src={`${process.env.REACT_APP_BACKEND_URL}/static`+item.image} alt={item.name} className='w-20 h-20 mr-4'></img>
                             <Link to={`/product/${item.product}`} className='md:grid md:grid-cols-3 gap-6'>
                                 <div>{item.name}</div>
                                 <div>{item.qty}×${item.price}=${item.qty*item.price}</div>
