@@ -62,7 +62,6 @@ export const ProductEditScreen = ({match,history}) => {
             setImage(data)
             setUploading(false)
         }catch(e){
-// console.log(e)
             setUploading(false)
         }
     }
